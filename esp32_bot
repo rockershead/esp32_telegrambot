@@ -1,0 +1,56 @@
+/*
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com/telegram-esp32-motion-detection-arduino/
+  
+  Project created using Brian Lough's Universal Telegram Bot Library: https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot
+*/
+
+#include <WiFi.h>
+#include <WiFiClientSecure.h>
+#include <UniversalTelegramBot.h>
+#include <ArduinoJson.h>
+
+// Replace with your network credentials
+const char* ssid = "SINGTEL-0ADF";
+const char* password = "0013474379";
+
+// Initialize Telegram BOT
+#define BOTtoken "1746355178:AAHMGUvRwv3nAd3NEkvRQyxfvfIITDh_a9o"   
+#define CHAT_ID "565419680"
+
+WiFiClientSecure client;
+UniversalTelegramBot bot(BOTtoken, client);
+
+
+
+
+
+void setup() {
+  Serial.begin(115200);
+
+  
+  
+
+  // Attempt to connect to Wifi network:
+  Serial.print("Connecting Wifi: ");
+  Serial.println(ssid);
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  bot.sendMessage(CHAT_ID, "Bot started up", "");
+}
+
+void loop() {
+  
+}
